@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "report.json — the content model for one subject's report",
+  "type": "object",
+  "required": ["subject", "layer1", "first_impression", "sections", "assessment", "limitations", "sources", "confidence"],
+  "properties": {
+    "subject": {
+      "type": "object",
+      "required": ["slug", "name", "sample_date"],
+      "properties": {
+        "slug": {"type": "string"},
+        "name": {"type": "string"},
+        "org": {"type": "string"},
+        "role_verified": {"type": "string"},
+        "sample_date": {"type": "string"}
+      }
+    },
+    "layer1": {
+      "type": "object",
+      "required": ["headline", "key_figures", "searcher_finds", "scorecard", "fixes"],
+      "properties": {
+        "headline": {"type": "string", "minLength": 20},
+        "key_figures": {
+          "type": "array", "minItems": 4, "maxItems": 4,
+          "items": {"type": "object", "required": ["label", "value"],
+            "properties": {"label": {"type": "string"}, "value": {"type": "string"}, "note": {"type": "string"}}}
+        },
+        "searcher_finds": {"type": "array", "minItems": 2, "maxItems": 4, "items": {"type": "string"}},
+        "scorecard": {
+          "type": "array", "minItems": 6, "maxItems": 6,
+          "items": {"type": "object", "required": ["dimension", "verdict", "evidence"],
+            "properties": {"dimension": {"type": "string"}, "verdict": {"type": "string"}, "evidence": {"type": "string"}}}
+        },
+        "fixes": {
+          "type": "array", "minItems": 3, "maxItems": 3,
+          "items": {"type": "object", "required": ["title", "what", "effort", "why"],
+            "properties": {"title": {"type": "string"}, "what": {"type": "string"},
+              "effort": {"type": "string", "enum": ["Low", "Medium", "High"]}, "why": {"type": "string"}}}
+        }
+      }
+    },
+    "first_impression": {
+      "type": "array", "minItems": 10,
+      "items": {"type": "object", "required": ["query", "rank", "title", "url", "class"],
+        "properties": {
+          "query": {"type": "string"}, "rank": {"type": "integer"},
+          "title": {"type": "string"}, "url": {"type": "string"},
+          "class": {"type": "string", "enum": ["company-owned", "editorial", "sponsored", "aggregator", "auto-generated", "data-broker", "wrong-person"]}
+        }}
+    },
+    "sections": {
+      "type": "object",
+      "required": ["career", "public_profile", "topics", "media", "digital_social", "inventory_lead", "network", "title_variants"],
+      "properties": {
+        "career": {"type": "array", "items": {"$ref": "#/$defs/row"}},
+        "public_profile": {"type": "array", "items": {"$ref": "#/$defs/row"}},
+        "topics": {
+          "type": "object",
+          "properties": {
+            "quotes": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["text", "said_where"],
+              "properties": {"text": {"type": "string"}, "said_where": {"type": "string"}, "date": {"type": "string"}, "url": {"type": "string"}}}},
+            "themes": {"type": "array", "items": {"type": "object", "required": ["theme"],
+              "properties": {"theme": {"type": "string"}, "weight": {"type": "integer"}, "evidence_count": {"type": "integer"}}}}
+          }
+        },
+        "media": {
+          "type": "object",
+          "properties": {
+            "coverage": {"type": "array", "items": {"$ref": "#/$defs/row"}},
+            "adverse": {"type": "array", "items": {"$ref": "#/$defs/row"}},
+            "not_covered": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+          }
+        },
+        "digital_social": {
+          "type": "object",
+          "properties": {
+            "by": {"type": "array", "items": {"$ref": "#/$defs/row"}},
+            "about": {"type": "array", "items": {"$ref": "#/$defs/row"}},
+            "not_assessable": {"type": "array", "items": {"$ref": "#/$defs/row"}}
+          }
+        },
+        "inventory_lead": {"type": "string", "minLength": 80},
+        "av_items": {"type": "array", "items": {"type": "object", "required": ["kind", "title", "finding"],
+          "properties": {"kind": {"type": "string", "enum": ["VIDEO", "AUDIO"]}, "title": {"type": "string"},
+            "host": {"type": "string"}, "date": {"type": "string"}, "duration": {"type": "string"},
+            "title_used": {"type": "string"}, "on_screen": {"type": "string"}, "finding": {"type": "string"}, "url": {"type": "string"}}}},
+        "network": {"type": "array", "items": {"$ref": "#/$defs/row"}},
+        "title_variants": {"type": "array", "items": {"$ref": "#/$defs/row"}}
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "required": ["best_known_for", "unfamiliar_concludes", "strong", "gaps", "fixes_ranked"],
+      "properties": {
+        "best_known_for": {"type": "string"},
+        "unfamiliar_concludes": {"type": "string"},
+        "strong": {"type": "array", "items": {"type": "string"}},
+        "gaps": {"type": "array", "items": {"type": "string"}},
+        "fixes_ranked": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "sources": {"type": "array", "minItems": 10, "items": {"type": "object", "required": ["url", "title"],
+      "properties": {"url": {"type": "string"}, "title": {"type": "string"}, "accessed": {"type": "string"}}}},
+    "confidence": {"type": "object", "required": ["level", "statement"],
+      "properties": {"level": {"type": "string", "enum": ["High", "Medium", "Low"]}, "statement": {"type": "string", "minLength": 40}}}
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "required": ["tag", "finding", "url"],
+      "properties": {
+        "tag": {"type": "string", "enum": ["FACT", "FLAG"]},
+        "marks": {"type": "array", "items": {"type": "string", "enum": ["SINGLE-SOURCE", "NOT VERIFIED"]}},
+        "finding": {"type": "string"},
+        "date": {"type": "string"},
+        "title_used": {"type": "string"},
+        "url": {"type": "string"},
+        "accessed": {"type": "string"}
+      }
+    }
+  }
+}

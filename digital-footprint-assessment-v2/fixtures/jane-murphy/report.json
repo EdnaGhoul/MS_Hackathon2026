@@ -1,0 +1,596 @@
+{
+ "subject": {
+  "slug": "jane-murphy",
+  "name": "Jane Murphy",
+  "org": "Example Group",
+  "role_verified": "Chief Operations Officer",
+  "sample_date": "2026-09-19"
+ },
+ "layer1": {
+  "headline": "Jane Murphy's public record is accurate where her employer controls it and five years out of date everywhere else, so the first screen introduces a role she left in 2021 before it introduces the one she holds.",
+  "key_figures": [
+   {
+    "label": "Title variants live",
+    "value": "3",
+    "note": "one superseded, one abbreviated"
+   },
+   {
+    "label": "Sources reviewed",
+    "value": "31",
+    "note": "retrieved during this run"
+   },
+   {
+    "label": "Adverse items",
+    "value": "0",
+    "note": "in the sources searched"
+   },
+   {
+    "label": "Wrong-person results",
+    "value": "1",
+    "note": "in the first five"
+   }
+  ],
+  "searcher_finds": [
+   "The employer leadership page ranks first for both queries and is accurate and current.",
+   "The second result is an aggregator profile carrying a title she left in 2021, and the fifth is a different Jane Murphy entirely.",
+   "Independent, editorial material exists but sits below the aggregated and sponsored results a casual searcher stops at."
+  ],
+  "scorecard": [
+   {
+    "dimension": "Credibility",
+    "verdict": "Adequate",
+    "evidence": "Facts corroborate across the employer page, two annual reports and the standards register, with one unverified programme claim."
+   },
+   {
+    "dimension": "Adverse material",
+    "verdict": "Clean",
+    "evidence": "Nothing critical or disputed in the sources searched, which did not include paywalled archives, court filings or broadcast."
+   },
+   {
+    "dimension": "Distinctiveness",
+    "verdict": "Moderate",
+    "evidence": "A consistent operational-resilience theme runs through her appearances, but most published material restates her job description."
+   },
+   {
+    "dimension": "Discoverability",
+    "verdict": "Diluted",
+    "evidence": "A namesake and an outdated aggregator profile both occupy the first screen for the bare-name query."
+   },
+   {
+    "dimension": "Consistency",
+    "verdict": "Mixed",
+    "evidence": "Three live title forms and one restructured business unit named in the employer biography."
+   },
+   {
+    "dimension": "Momentum",
+    "verdict": "Steady",
+    "evidence": "Four dated public items across 2024 and 2025, roughly one every six months."
+   }
+  ],
+  "fixes": [
+   {
+    "title": "Correct the aggregator entry",
+    "effort": "Low",
+    "what": "Submit the current title and employer through the directory's correction form, then re-sample the first screen four weeks later.",
+    "why": "It is the second result for her name and it is wrong, which costs more than any amount of new content would add."
+   },
+   {
+    "title": "Refresh the employer biography",
+    "effort": "Low",
+    "what": "Remove the restructured unit name, state the standards-body appointment, and date the page so republication carries a timestamp.",
+    "why": "The employer page is what every aggregator copies, so one correction propagates."
+   },
+   {
+    "title": "Publish one owned piece a quarter",
+    "effort": "Medium",
+    "what": "Short bylined comment on operational resilience, published on the newsroom and syndicated once.",
+    "why": "It is the only lever that moves Distinctiveness without relying on other people's coverage."
+   }
+  ]
+ },
+ "first_impression": [
+  {
+   "query": "Jane Murphy",
+   "rank": 1,
+   "title": "Jane Murphy — Example Group leadership",
+   "url": "https://www.example.com/leadership/jane-murphy",
+   "class": "company-owned"
+  },
+  {
+   "query": "Jane Murphy",
+   "rank": 2,
+   "title": "Jane Murphy, Director of Supply Chain — directory profile",
+   "url": "https://directory.example.org/people/jane-murphy",
+   "class": "aggregator"
+  },
+  {
+   "query": "Jane Murphy",
+   "rank": 3,
+   "title": "Operations chief on resilience — trade quarterly",
+   "url": "https://trade.example.net/features/operations-2025",
+   "class": "editorial"
+  },
+  {
+   "query": "Jane Murphy",
+   "rank": 4,
+   "title": "Jane Murphy — public records and contact details",
+   "url": "https://broker.example.info/p/jane-murphy",
+   "class": "data-broker"
+  },
+  {
+   "query": "Jane Murphy",
+   "rank": 5,
+   "title": "Jane Murphy, ceramic artist — studio site",
+   "url": "https://studio.example.art/about",
+   "class": "wrong-person"
+  },
+  {
+   "query": "Jane Murphy Example Group",
+   "rank": 1,
+   "title": "Jane Murphy — Example Group leadership",
+   "url": "https://www.example.com/leadership/jane-murphy",
+   "class": "company-owned"
+  },
+  {
+   "query": "Jane Murphy Example Group",
+   "rank": 2,
+   "title": "Example Group names new COO — wire summary",
+   "url": "https://wire.example.net/2021/appointments",
+   "class": "editorial"
+  },
+  {
+   "query": "Jane Murphy Example Group",
+   "rank": 3,
+   "title": "Example Group executive team — company profile",
+   "url": "https://www.example.com/about/board",
+   "class": "company-owned"
+  },
+  {
+   "query": "Jane Murphy Example Group",
+   "rank": 4,
+   "title": "Jane Murphy — auto-generated biography",
+   "url": "https://bios.example.info/jane-murphy",
+   "class": "auto-generated"
+  },
+  {
+   "query": "Jane Murphy Example Group",
+   "rank": 5,
+   "title": "Example Group — sponsored listing",
+   "url": "https://ads.example.net/example-group",
+   "class": "sponsored"
+  }
+ ],
+ "sections": {
+  "career": [
+   {
+    "tag": "FACT",
+    "finding": "Named Chief Operations Officer of Example Group in March 2021, a promotion from Director of Supply Chain, a role she had held since 2017 according to the company's own leadership page and two subsequent annual reports.",
+    "url": "https://www.example.com/leadership/jane-murphy",
+    "accessed": "2026-09-19",
+    "date": "Mar 2021"
+   },
+   {
+    "tag": "FACT",
+    "finding": "Holds a degree in industrial engineering and a management qualification, both listed consistently on the employer page and on two independent conference biographies reviewed for this assessment.",
+    "url": "https://www.example.com/about/board",
+    "accessed": "2026-09-19"
+   },
+   {
+    "tag": "FLAG",
+    "finding": "An aggregator profile still presents the 2017 supply-chain title as current, and it ranks on the first screen for the bare-name query, so an ordinary searcher meets a role she left five years ago before meeting the one she holds.",
+    "url": "https://directory.example.org/people/jane-murphy",
+    "accessed": "2026-09-19",
+    "marks": [
+     "SINGLE-SOURCE"
+    ]
+   },
+   {
+    "tag": "FACT",
+    "finding": "Appointed a non-executive director of an industry standards body in 2023; the appointment is recorded on the body's own register and repeated in trade coverage.",
+    "url": "https://standards.example.org/register/2023",
+    "accessed": "2026-09-19",
+    "date": "2023"
+   },
+   {
+    "tag": "FLAG",
+    "finding": "No independent record of the 2019 operational programme credited to her on the employer page could be located in trade press or regulatory filings during this run.",
+    "url": "https://www.example.com/news/2019-programme",
+    "accessed": "2026-09-19",
+    "marks": [
+     "NOT VERIFIED"
+    ]
+   }
+  ],
+  "public_profile": [
+   {
+    "tag": "FACT",
+    "finding": "Panel member, Example Supply Chain Forum, on the resilience of multi-site manufacturing networks; the session page carries a recorded video and a full speaker list.",
+    "url": "https://forum.example.org/2025/panel-resilience",
+    "accessed": "2026-09-19",
+    "date": "May 2025",
+    "title_used": "Chief Operations Officer, Example Group"
+   },
+   {
+    "tag": "FACT",
+    "finding": "Interviewed for a trade podcast on automation in food manufacturing, a 34-minute episode with a written summary and a transcript published alongside it.",
+    "url": "https://podcast.example.net/episodes/142",
+    "accessed": "2026-09-19",
+    "date": "Nov 2025",
+    "title_used": "COO, Example Group"
+   },
+   {
+    "tag": "FLAG",
+    "finding": "A university alumni page announces her as a 2024 guest lecturer under the superseded supply-chain title, which is the same defect the aggregator carries and suggests the source of both is an old press biography.",
+    "url": "https://alumni.example.edu/events/2024-guest-lecture",
+    "accessed": "2026-09-19",
+    "date": "2024",
+    "title_used": "Director of Supply Chain"
+   },
+   {
+    "tag": "FACT",
+    "finding": "Keynote at a regional manufacturing awards evening, reported by one local outlet with a photograph and a two-paragraph write-up.",
+    "url": "https://localnews.example.co/awards-2025",
+    "accessed": "2026-09-19",
+    "date": "Oct 2025"
+   }
+  ],
+  "topics": {
+   "quotes": [
+    {
+     "text": "Resilience is not a project you finish; it is a cost you choose to keep paying after the crisis is over.",
+     "said_where": "Example Supply Chain Forum panel",
+     "date": "May 2025",
+     "url": "https://forum.example.org/2025/panel-resilience"
+    },
+    {
+     "text": "Automation moved our constraint from the line to the people who plan it.",
+     "said_where": "Trade podcast, episode 142",
+     "date": "Nov 2025",
+     "url": "https://podcast.example.net/episodes/142"
+    }
+   ],
+   "themes": [
+    {
+     "theme": "Operational resilience after disruption",
+     "weight": 5,
+     "evidence_count": 6
+    },
+    {
+     "theme": "Automation and the planning constraint",
+     "weight": 3,
+     "evidence_count": 3
+    },
+    {
+     "theme": "Multi-site manufacturing networks",
+     "weight": 2,
+     "evidence_count": 2
+    }
+   ]
+  },
+  "media": {
+   "coverage": [
+    {
+     "tag": "FACT",
+     "finding": "Trade quarterly profile of the group's operations programme, quoting her twice and carrying an independently commissioned photograph.",
+     "url": "https://trade.example.net/features/operations-2025",
+     "accessed": "2026-09-19",
+     "date": "Jun 2025"
+    },
+    {
+     "tag": "FACT",
+     "finding": "Regional outlet reports the awards keynote with a stage photograph credited to a named staff photographer.",
+     "url": "https://localnews.example.co/awards-2025",
+     "accessed": "2026-09-19",
+     "date": "Oct 2025"
+    },
+    {
+     "tag": "FACT",
+     "finding": "A wire summary of the 2021 appointment, republished verbatim by four aggregators, which is why the appointment is the single most repeated fact about her online.",
+     "url": "https://wire.example.net/2021/appointments",
+     "accessed": "2026-09-19",
+     "date": "Mar 2021"
+    }
+   ],
+   "adverse": [],
+   "not_covered": [
+    "paywalled trade archives",
+    "court and regulatory filings",
+    "broadcast and radio",
+    "non-English media",
+    "login-walled platforms"
+   ]
+  },
+  "digital_social": {
+   "by": [
+    {
+     "tag": "FACT",
+     "finding": "Occasional posts under her own name on a professional network, all work-related and all tied to employer announcements; the platform requires a login, so volume and reach could not be assessed.",
+     "url": "https://www.example.com/leadership/jane-murphy",
+     "accessed": "2026-09-19",
+     "marks": [
+      "NOT VERIFIED"
+     ]
+    },
+    {
+     "tag": "FACT",
+     "finding": "Two bylined comment pieces on the employer's own newsroom, both about operational resilience rather than about her.",
+     "url": "https://www.example.com/news/resilience-comment",
+     "accessed": "2026-09-19"
+    }
+   ],
+   "about": [
+    {
+     "tag": "FACT",
+     "finding": "The wire appointment summary and its four republications account for most of what third parties publish about her.",
+     "url": "https://wire.example.net/2021/appointments",
+     "accessed": "2026-09-19"
+    },
+    {
+     "tag": "FLAG",
+     "finding": "A data-broker page assembles an unverified profile from scraped sources; its contents were not reproduced here.",
+     "url": "https://broker.example.info/p/jane-murphy",
+     "accessed": "2026-09-19",
+     "marks": [
+      "SINGLE-SOURCE"
+     ]
+    }
+   ],
+   "not_assessable": [
+    {
+     "tag": "FLAG",
+     "finding": "The professional network profile is login-walled, and it is almost certainly her largest owned channel; nothing behind that wall was assessed.",
+     "url": "https://www.example.com/leadership/jane-murphy",
+     "accessed": "2026-09-19",
+     "marks": [
+      "NOT VERIFIED"
+     ]
+    }
+   ]
+  },
+  "inventory_lead": "The visual record is narrow and almost entirely employer-controlled. One corporate headshot, served from a single image library, accounts for the photograph a searcher meets on the employer page, on the wire summary and on all four of its republications: many result URLs, one photograph. Two assets sit outside that control — a stage photograph from the 2025 awards evening credited to a named staff photographer, and a panel photograph from the forum — and both are more recent than the headshot and show her working rather than posed. Captions attach three different job titles across those assets, which is the same inconsistency the title-variants section records. One further candidate was captured, inspected and discarded: it shows a different person with the same name. For a Corporate Affairs team the practical consequence is narrow rather than serious: the imagery is accurate but monotonous, and a single refreshed sitting would replace the one picture that carries the whole record.",
+  "av_items": [
+   {
+    "kind": "VIDEO",
+    "title": "Panel: resilience in multi-site manufacturing",
+    "host": "forum.example.org",
+    "date": "May 2025",
+    "duration": "48 min",
+    "title_used": "Chief Operations Officer, Example Group",
+    "on_screen": "the subject appears from 06:10, seated, third from left",
+    "finding": "three frames sampled across the runtime show the panel wide; the thumbnail is the event's branded title card, not the subject.",
+    "url": "https://video.example.net/channel/forum"
+   },
+   {
+    "kind": "AUDIO",
+    "title": "Trade podcast, episode 142",
+    "host": "podcast.example.net",
+    "date": "Nov 2025",
+    "duration": "34 min",
+    "title_used": "COO, Example Group",
+    "on_screen": "none — audio over a static show card",
+    "finding": "audio only, so no moving-image or still asset of the subject exists here.",
+    "url": "https://podcast.example.net/episodes/142"
+   }
+  ],
+  "network": [
+   {
+    "tag": "FACT",
+    "finding": "Non-executive director, Example Standards Body, listed on the public register with an appointment date and a current status.",
+    "url": "https://standards.example.org/register/murphy",
+    "accessed": "2026-09-19"
+   },
+   {
+    "tag": "FACT",
+    "finding": "Member of a regional manufacturing association, named on its member directory page alongside her employer.",
+    "url": "https://association.example.org/members",
+    "accessed": "2026-09-19"
+   },
+   {
+    "tag": "FLAG",
+    "finding": "A second register entry lists an Example Group board seat that the group's own corporate page does not mention, which may be a renamed entity rather than a discrepancy.",
+    "url": "https://registry.example.gov/entities/48921",
+    "accessed": "2026-09-19",
+    "marks": [
+     "SINGLE-SOURCE"
+    ]
+   }
+  ],
+  "title_variants": [
+   {
+    "tag": "FACT",
+    "finding": "“Chief Operations Officer, Example Group” — the employer leadership page and the 2025 forum speaker listing agree on this form, and it is the correct current title.",
+    "url": "https://www.example.com/leadership/jane-murphy",
+    "accessed": "2026-09-19"
+   },
+   {
+    "tag": "FLAG",
+    "finding": "“COO” — the abbreviated form used by the podcast and by two syndicated republications of its summary.",
+    "url": "https://podcast.example.net/episodes/142",
+    "accessed": "2026-09-19"
+   },
+   {
+    "tag": "FLAG",
+    "finding": "“Director of Supply Chain” — superseded, still live on the alumni page and the aggregator profile, both of which rank in the first screen.",
+    "url": "https://directory.example.org/people/jane-murphy",
+    "accessed": "2026-09-19"
+   },
+   {
+    "tag": "FLAG",
+    "finding": "The business unit named in her employer biography was restructured in 2024 and no longer exists under that name, so the biography describes an organisation a reader cannot find.",
+    "url": "https://www.example.com/news/2024-restructure",
+    "accessed": "2026-09-19",
+    "marks": [
+     "NOT VERIFIED"
+    ]
+   }
+  ]
+ },
+ "assessment": {
+  "best_known_for": "Being the operations lead who talks about resilience as a running cost rather than a recovery project — a line that is quoted twice and echoed in the trade profile.",
+  "unfamiliar_concludes": "A searcher who stops at the first screen concludes she is a supply-chain director at a company they cannot quite place, because the two results above the editorial coverage are an outdated aggregator entry and a namesake.",
+  "strong": [
+   "The employer-controlled record is accurate, current and consistently titled.",
+   "Two independent, dated appearances in 2025 with verbatim quotes attached.",
+   "A public register entry corroborates the non-executive appointment."
+  ],
+  "gaps": [
+   "Three live title forms, one of them five years superseded and ranking on page one.",
+   "A restructured business unit still named in the employer biography.",
+   "One photograph carries almost the entire visual record.",
+   "The largest owned channel is login-walled and could not be assessed."
+  ],
+  "fixes_ranked": [
+   "Correct the aggregator entry — lowest effort, largest first-screen effect.",
+   "Refresh and date the employer biography so republication carries a timestamp.",
+   "Commission one refreshed photographic sitting outside the corporate library.",
+   "Publish one owned comment piece a quarter to build a theme of her own."
+  ]
+ },
+ "limitations": [
+  "Only public web sources retrieved during this run on 2026-09-19 were used.",
+  "Paywalled archives, court and regulatory filings, broadcast and non-English media were not searched, so the adverse-material finding is bounded by that.",
+  "Login-walled platforms could not be assessed at all.",
+  "Search visibility is a point-in-time sample and will differ by searcher and location."
+ ],
+ "sources": [
+  {
+   "url": "https://www.example.com/leadership/jane-murphy",
+   "title": "Named Chief Operations Officer of Example Group in March 2021, a promo…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://www.example.com/about/board",
+   "title": "Holds a degree in industrial engineering and a management qualificatio…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://directory.example.org/people/jane-murphy",
+   "title": "An aggregator profile still presents the 2017 supply-chain title as cu…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://standards.example.org/register/2023",
+   "title": "Appointed a non-executive director of an industry standards body in 20…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://www.example.com/news/2019-programme",
+   "title": "No independent record of the 2019 operational programme credited to he…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://forum.example.org/2025/panel-resilience",
+   "title": "Panel member, Example Supply Chain Forum, on the resilience of multi-s…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://podcast.example.net/episodes/142",
+   "title": "Interviewed for a trade podcast on automation in food manufacturing, a…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://alumni.example.edu/events/2024-guest-lecture",
+   "title": "A university alumni page announces her as a 2024 guest lecturer under …",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://localnews.example.co/awards-2025",
+   "title": "Keynote at a regional manufacturing awards evening, reported by one lo…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://standards.example.org/register/murphy",
+   "title": "Non-executive director, Example Standards Body, listed on the public r…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://association.example.org/members",
+   "title": "Member of a regional manufacturing association, named on its member di…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://registry.example.gov/entities/48921",
+   "title": "A second register entry lists an Example Group board seat that the gro…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://www.example.com/news/2024-restructure",
+   "title": "The business unit named in her employer biography was restructured in …",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://trade.example.net/features/operations-2025",
+   "title": "Trade quarterly profile of the group's operations programme, quoting h…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://wire.example.net/2021/appointments",
+   "title": "A wire summary of the 2021 appointment, republished verbatim by four a…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://www.example.com/news/resilience-comment",
+   "title": "Two bylined comment pieces on the employer's own newsroom, both about …",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://broker.example.info/p/jane-murphy",
+   "title": "A data-broker page assembles an unverified profile from scraped source…",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://studio.example.art/about",
+   "title": "Jane Murphy, ceramic artist — studio site",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://bios.example.info/jane-murphy",
+   "title": "Jane Murphy — auto-generated biography",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://ads.example.net/example-group",
+   "title": "Example Group — sponsored listing",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://forum.example.org/2025/speakers",
+   "title": "Example Supply Chain Forum — full speaker list",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://www.example.com/annual-report-2025",
+   "title": "Example Group annual report 2025",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://www.example.com/annual-report-2024",
+   "title": "Example Group annual report 2024",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://standards.example.org/about",
+   "title": "Example Standards Body — about",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://trade.example.net/archive",
+   "title": "Trade quarterly archive search",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://localnews.example.co/archive",
+   "title": "Regional outlet archive search",
+   "accessed": "2026-09-19"
+  },
+  {
+   "url": "https://video.example.net/channel/forum",
+   "title": "Forum video channel",
+   "accessed": "2026-09-19"
+  }
+ ],
+ "confidence": {
+  "level": "Medium",
+  "statement": "The employer-controlled facts are corroborated across three independent sources and the register entry is public, so the core record is reliable. Confidence is held at Medium because the largest owned channel is login-walled, one programme claim could not be verified anywhere, and paywalled and broadcast archives were not searched."
+ }
+}

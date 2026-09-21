@@ -1,0 +1,74 @@
+{
+  "description": "Independent public digital-footprint and reputation assessment of one named person OR a named roster\n(leadership team, board, spokespeople), from public web sources retrieved during the run. One Word +\nHTML report per person: a one-page card (headline finding, key figures, six-dimension scorecard, three\nfixes) over a sourced evidence pack covering career, appearances, quotes, media, social, photographs,\nnetwork and title variants. Use when asked to \"assess someone's online presence\", \"digital footprint of\nX\", \"what does the internet say about X\", \"reputation review\", \"how does our leadership team show up\nonline\", or \"what photos of X are public\". For general research or sources on a topic use deep-research\ninstead; for plain Word report formatting use docx. Do NOT use it to evaluate job performance, rank\npeople, or research private life.\n",
+  "description_length": {
+    "detail": "850/1024 UTF-16 units",
+    "headroom_units": 174,
+    "max_units": 1024,
+    "status": "PASS",
+    "units": 850
+  },
+  "dimension_notes": {
+    "instruction_specificity": [
+      "27 workflow line(s)",
+      "has Quick Start / example block",
+      "no specific tools named",
+      "specifies output format"
+    ],
+    "robustness": [
+      "has Guardrails section",
+      "11 guardrail-style rule(s)",
+      "handles missing-data / failure"
+    ],
+    "scope_boundaries": [
+      "has 'When NOT to Use' section",
+      "description states exclusions",
+      "focused single-domain scope"
+    ],
+    "trigger_clarity": [
+      "6 explicit trigger phrase(s)",
+      "has exclusion clause"
+    ]
+  },
+  "dimension_semantics": "advisory-only",
+  "dimensions": {
+    "instruction_specificity": 22,
+    "robustness": 23,
+    "scope_boundaries": 23,
+    "trigger_clarity": 25
+  },
+  "faithfulness": {
+    "detail": "instructs grounding / no-fabrication",
+    "status": "PASS"
+  },
+  "grade": "Excellent",
+  "improvements": [],
+  "mvb_pass": true,
+  "mvb_threshold": 70,
+  "path": "digital-footprint-assessment-v2/SKILL.md",
+  "risk": {
+    "factors": [
+      "takes actions (autonomy / blast radius)"
+    ],
+    "launch_floor": 70,
+    "requires_behavioral": true,
+    "requires_human_review": false,
+    "tier": "medium"
+  },
+  "rubric_version": "3",
+  "safety": [
+    {
+      "area": "people-profiling",
+      "detail": "Touches 'people-profiling' scope",
+      "status": "WARN"
+    }
+  ],
+  "skill_name": "digital-footprint-assessment-v2",
+  "spec_conformance": {
+    "detail": "Frontmatter conforms to the AgentSkills spec.",
+    "host_extension_keys": [],
+    "non_spec_keys": [],
+    "status": "PASS"
+  },
+  "timestamp": "2026-09-19 21:37 UTC",
+  "total": 93
+}

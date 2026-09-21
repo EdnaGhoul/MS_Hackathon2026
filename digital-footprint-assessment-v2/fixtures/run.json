@@ -1,0 +1,8 @@
+{
+ "depth": "standard",
+ "capture_budget": 8,
+ "brand": "default",
+ "sample_date": "2026-09-19",
+ "max_attempts_per_subject": 24,
+ "max_minutes_per_subject": 12
+}

@@ -1,0 +1,7 @@
+{
+ "source_url": "https://cdn.example.com/is/image/example/jane-murphy?$PRESET$",
+ "native_w": 2000,
+ "native_h": 1452,
+ "capture_tier": "A",
+ "upscaled": false
+}

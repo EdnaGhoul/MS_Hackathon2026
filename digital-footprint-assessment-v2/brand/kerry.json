@@ -1,0 +1,31 @@
+{
+  "name": "kerry",
+  "font_body": "Aptos",
+  "font_body_fallback": "Calibri",
+  "size_body_pt": 10.5,
+  "ink": "1A1A1A",
+  "muted": "5B5B5B",
+  "rule": "D8D8D8",
+  "accent": "00953B",
+  "callout_bg": "EAF5EE",
+  "chip": {
+    "FACT": "1F5FA9",
+    "FLAG": "B25E00",
+    "SINGLE-SOURCE": "6B6B6B",
+    "NOT VERIFIED": "A61B1B",
+    "WRONG PERSON": "111111",
+    "company-owned": "1F5FA9",
+    "editorial": "2E6B4F",
+    "sponsored": "7A5AA6",
+    "aggregator": "6B6B6B",
+    "auto-generated": "8A6D1F",
+    "data-broker": "B25E00",
+    "wrong-person": "111111"
+  },
+  "verdict": {
+    "good": "2E6B4F",
+    "mid": "B25E00",
+    "bad": "A61B1B",
+    "grey": "6B6B6B"
+  }
+}
