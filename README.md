@@ -1,9 +1,10 @@
 # MS_Hackathon2026 — Executive AI Readiness
 
 **Microsoft Global Hackathon 2026**
+
 Owners and developers: **Stefania Conte** and **Dmitrii Dolzhenkov**
 
-A library of Copilot Cowork skills that help senior leaders discover, experience and adopt executive-specific uses of agentic AI — uses that **augment** the leader's ability to sense, judge, direct and govern, rather than duplicating work already delegated to their people.
+A library of Copilot Cowork skills that help senior leaders discover, experience and adopt executive-specific uses of agentic AI. These skills **augment** a leader's ability to sense, judge, direct and govern across the organisation; they do not duplicate the work already delegated.
 
 ---
 
@@ -318,5 +319,6 @@ Three files at the repository root shaped the skills. They are inputs, not deliv
 |---|---|
 | **Stefania Conte** | Owner and developer |
 | **Dmitrii Dolzhenkov** | Owner and developer |
+| **Micheal McGrath** | Contributor |
 
 Built for the **Microsoft Global Hackathon 2026**.
