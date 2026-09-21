@@ -1,0 +1,74 @@
+{
+  "description": "Independent public digital-footprint and reputation assessment of one named person OR a named group (leadership team, board, roster), from public web sources retrieved during the run. Takes the names from the user's prompt; asks only when none are given. Always one report per person: a one-page card (headline finding, key figures, six-dimension scorecard, three fixes) over an evidence pack of career, appearances, quotes, media, social, photo inventory, boards and job-title variants, every finding carrying a URL and access date, every documented photograph captured and shown. Use when asked to \"assess someone's online presence\", \"digital footprint of X\", \"what does the internet say about X\", \"reputation review\", or the same for a leadership team. Do NOT use to evaluate job performance or research private life.\n",
+  "description_length": {
+    "detail": "821/1024 UTF-16 units",
+    "headroom_units": 203,
+    "max_units": 1024,
+    "status": "PASS",
+    "units": 821
+  },
+  "dimension_notes": {
+    "instruction_specificity": [
+      "44 workflow line(s)",
+      "has Quick Start / example block",
+      "names tools / data sources",
+      "specifies output format"
+    ],
+    "robustness": [
+      "has Guardrails section",
+      "14 guardrail-style rule(s)",
+      "handles missing-data / failure"
+    ],
+    "scope_boundaries": [
+      "has 'When NOT to Use' section",
+      "description states exclusions",
+      "focused single-domain scope"
+    ],
+    "trigger_clarity": [
+      "4 explicit trigger phrase(s)",
+      "has exclusion clause"
+    ]
+  },
+  "dimension_semantics": "advisory-only",
+  "dimensions": {
+    "instruction_specificity": 25,
+    "robustness": 23,
+    "scope_boundaries": 23,
+    "trigger_clarity": 23
+  },
+  "faithfulness": {
+    "detail": "instructs grounding / no-fabrication",
+    "status": "PASS"
+  },
+  "grade": "Excellent",
+  "improvements": [],
+  "mvb_pass": true,
+  "mvb_threshold": 70,
+  "path": "working/digital-footprint-assessment/SKILL.md",
+  "risk": {
+    "factors": [
+      "takes actions (autonomy / blast radius)"
+    ],
+    "launch_floor": 70,
+    "requires_behavioral": true,
+    "requires_human_review": false,
+    "tier": "medium"
+  },
+  "rubric_version": "3",
+  "safety": [
+    {
+      "area": "people-profiling",
+      "detail": "Touches 'people-profiling' scope",
+      "status": "WARN"
+    }
+  ],
+  "skill_name": "digital-footprint-assessment",
+  "spec_conformance": {
+    "detail": "Frontmatter conforms to the AgentSkills spec.",
+    "host_extension_keys": [],
+    "non_spec_keys": [],
+    "status": "PASS"
+  },
+  "timestamp": "2026-09-18 07:18 UTC",
+  "total": 94
+}
