@@ -52,7 +52,7 @@ Every skill in this repo is a test of that hypothesis.
 
 ## 2. What this repo is
 
-This is **not a single application**. It is a collection of **15 Copilot Cowork skills**, plus the research that shaped them. A skill is a folder containing a `SKILL.md` file (the instructions Copilot follows, the phrases that trigger it, and its guardrails) and optionally supporting references, scripts, templates and assets.
+This is **not a single application**. It is a collection of **15 Copilot Cowork skills**, plus the research that shaped them. A skill is a folder containing a `SKILL.md` file (the instructions Cowork follows, the phrases that trigger it, and its guardrails) and optionally supporting references, scripts, templates and assets.
 
 The skills fall into three groups:
 
@@ -66,7 +66,6 @@ The skills fall into three groups:
 
 ## 3. How to navigate the repo
 
-**If you have five minutes:**
 1. Read [section 1](#1-the-problem-we-started-from) above for the problem.
 2. Look at the [diagram](#4-repository-structure-visual) to see how the pieces fit.
 3. Open `strategy-start/SKILL.md` — it is the "front door" of the largest component and explains the framework in plain words.
@@ -169,7 +168,7 @@ MS_Hackathon2026/
 ### Foundation layer
 
 #### `signature`
-Stores and serves the leader's professional identity, voice and guardrails so every other skill sounds like them. Runs a short first-run interview (max five questions), samples the leader's real writing for voice, keeps **one** human-editable profile file, and serves it to authoring skills through a *consumption contract*. Supports conversational edits ("stop saying X", "make exec summaries shorter") and lightweight drift capture over time.
+Stores and serves the user's professional identity, voice and guardrails so every other skill sounds like them. Runs a short first-run interview (max five questions), samples the user's real writing for voice, keeps **one** human-editable profile file, and serves it to authoring skills through a *consumption contract*. Supports conversational edits ("stop saying X", "make exec summaries shorter") and lightweight drift capture over time.
 **Try:** *"set up my Signature"*, *"show my profile"*, *"change my tone"*.
 
 #### `on-brand-prep`
