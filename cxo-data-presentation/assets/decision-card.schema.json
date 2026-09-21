@@ -1,0 +1,162 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "cxo-data-presentation decision card",
+  "description": "Field schema for the Route A Adaptive Card. Blocks render in this exact order. Every material string carries an F/E/A/J tag. Placeholders use the literal form [MISSING: <item> - <lookup> returned nothing].",
+  "type": "object",
+  "required": ["mode", "lens", "tier", "question", "footer"],
+  "properties": {
+    "mode": { "enum": ["BUILD", "REVIEW"] },
+    "lens": { "enum": ["CEO-board", "CFO", "CIO-CTO", "Sales-exec", "COO-Risk"] },
+    "lens_inferred": { "type": "boolean" },
+    "tier": { "enum": ["S1", "S2", "S3"] },
+    "tier_inferred": { "type": "boolean" },
+    "emphasis": { "enum": ["minimal", "keynote"], "default": "minimal" },
+
+    "question": { "type": "string", "description": "Block 1. One sentence." },
+
+    "answer": { "type": "string", "description": "Block 2 (BUILD). One complete sentence stating the conclusion." },
+    "facts": {
+      "description": "Block 3 (BUILD). Max 3.",
+      "type": "array", "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["text", "tag", "comparator"],
+        "properties": {
+          "text": { "type": "string" },
+          "tag": { "enum": ["F", "E", "A", "J"] },
+          "comparator": { "type": "string", "description": "Target / forecast / prior / baseline / benchmark, or a [MISSING: ...] placeholder." },
+          "source": { "type": "string" },
+          "as_of": { "type": "string" }
+        }
+      }
+    },
+    "implication": { "type": "string", "description": "Block 4 (BUILD). One sentence in the lens value language." },
+    "visual": {
+      "description": "Block 5 (BUILD, optional).",
+      "type": "object",
+      "properties": {
+        "message_title": { "type": "string" },
+        "chart_type": { "type": "string" },
+        "annotation": { "type": "string" },
+        "comparator_drawn": { "type": "boolean" },
+        "zero_baseline": { "type": "boolean" },
+        "status": { "enum": ["ok", "risk", "off", "nodata", "unjudged"] }
+      }
+    },
+    "recommendation": {
+      "description": "Block 6 (BUILD).",
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text": { "type": "string" },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["option", "trade_off"],
+            "properties": {
+              "option": { "type": "string" },
+              "is_bau": { "type": "boolean" },
+              "trade_off": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "decision_required": {
+      "description": "Block 7 (BUILD).",
+      "type": "object",
+      "required": ["ask", "authority", "from_whom", "by_when"],
+      "properties": {
+        "ask": { "type": "string" },
+        "authority": { "enum": ["funding", "priority", "risk acceptance", "direction", "forecast revision", "other"] },
+        "from_whom": { "type": "string" },
+        "by_when": { "type": "string" }
+      }
+    },
+    "follow_through": {
+      "description": "Block 8 (BUILD). One row per action.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["action", "owner", "timing", "success_measure"],
+        "properties": {
+          "action": { "type": "string" },
+          "owner": { "type": "string", "description": "From the source or [MISSING owner]. Never assigned from the org tree." },
+          "timing": { "type": "string" },
+          "success_measure": { "type": "string" },
+          "next_review": { "type": "string" }
+        }
+      }
+    },
+    "assumptions": {
+      "description": "Block 9 (BUILD).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["assumption", "owner"],
+        "properties": {
+          "assumption": { "type": "string" },
+          "basis": { "type": "string" },
+          "owner": { "type": "string" },
+          "range": { "type": "string", "description": "Required when the assumption drives a forecast." }
+        }
+      }
+    },
+
+    "verdict": {
+      "description": "REVIEW only. Exactly one of the three strings; N is the gap count.",
+      "type": "string",
+      "pattern": "^(Not exec-ready|Exec-ready with [0-9]+ gaps?|Exec-ready)$"
+    },
+    "gaps": {
+      "description": "REVIEW only. Blockers first, then Majors, then Minors.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "location", "evidence_found", "clears_it"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[A-Z]{3}-[0-9]{2}$" },
+          "severity": { "enum": ["Blocker", "Major", "Minor"] },
+          "location": { "type": "string" },
+          "evidence_found": { "type": "string" },
+          "clears_it": { "type": "string", "description": "The specific evidence or change. Max one example sentence." }
+        }
+      }
+    },
+    "absences": {
+      "description": "REVIEW only. Expected elements not present.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "final_test": {
+      "description": "Both modes. Six fixed questions.",
+      "type": "array", "minItems": 6, "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["question", "pass"],
+        "properties": { "question": { "type": "string" }, "pass": { "type": "boolean" } }
+      }
+    },
+
+    "exceptions": {
+      "description": "Material exceptions as fragments.",
+      "type": "array",
+      "items": { "type": "object", "required": ["kpi", "actual", "comparator", "tag"],
+        "properties": { "kpi": {"type":"string"}, "actual": {"type":"string"}, "comparator": {"type":"string"}, "breach": {"type":"string"}, "action": {"type":"string"}, "owner": {"type":"string"}, "due": {"type":"string"}, "tag": { "enum": ["F","E","A","J"] } } }
+    },
+    "visual_check": { "enum": ["pass", "fixed", "gaps"] },
+    "footer": {
+      "description": "Block 10. Always present.",
+      "type": "object",
+      "required": ["placeholder_count"],
+      "properties": {
+        "placeholder_count": { "type": "integer", "minimum": 0 },
+        "placeholders": { "type": "array", "items": { "type": "string" } },
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "known_gaps": { "type": "array", "items": { "type": "string" } },
+        "offer_build": { "type": "boolean", "description": "REVIEW: closing line offering BUILD." }
+      }
+    }
+  }
+}

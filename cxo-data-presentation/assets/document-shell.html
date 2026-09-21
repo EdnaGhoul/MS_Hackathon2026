@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<!--
+  cxo-data-presentation — HTML document shell (default BUILD output for briefs, decision
+  papers, QBR pre-reads and deck outlines). Self-contained: inline CSS, inline SVG, no
+  external assets. Fill the DATA block only. Design rules: references/design-system.md.
+  Tokens are the CSS variables in :root — an organisation edits those and nothing else.
+-->
+<style>
+  :root{
+    --font:"Aptos","Segoe UI",Calibri,Carlito,Helvetica,Arial,sans-serif;
+    --accent:#1F4E79; --ink:#1A1A1A; --muted:#6B6B6B; --tag:#8A8A8A; --hair:#D9D9D9; --fill:#F3F4F6;
+    --ok:#1B7F3B; --risk:#B8860B; --off:#B02A2A; --nodata:#6B6B6B;
+  }
+  *{box-sizing:border-box}
+  html{font-size:14px}
+  body{margin:0;font-family:var(--font);color:var(--ink);line-height:1.35;background:#fff}
+  .page{max-width:760px;margin:0 auto;padding:40px 48px 64px}
+  .hdr{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);margin-bottom:10px}
+  .hdr .label{color:var(--accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  h1{font-size:1.75rem;line-height:1.2;margin:0 0 6px;font-weight:700}
+  .prov{font-size:.82rem;color:var(--muted);margin-bottom:18px}
+  h2{font-size:1.15rem;line-height:1.25;margin:26px 0 8px;font-weight:700}
+  h3{font-size:1rem;margin:18px 0 6px;font-weight:700}
+  p{margin:0 0 8px}
+  .label{font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+  .callout{background:var(--fill);border-left:3px solid var(--accent);padding:12px 16px;margin:0 0 18px}
+  .callout .ask{font-size:1.05rem;margin:4px 0 8px}
+  .callout .strip{font-size:.82rem;color:var(--muted)}
+  .callout .strip b{color:var(--ink)}
+  sup.tag{font-size:.6em;color:var(--tag);font-weight:400;margin-left:1px;vertical-align:super}
+  .ph{color:var(--tag);font-style:italic}
+  table{width:100%;border-collapse:collapse;font-size:.93rem;margin:6px 0 4px}
+  th{text-align:left;font-size:.8rem;color:var(--muted);font-weight:700;padding:4px 8px 4px 0;border-bottom:1px solid var(--ink)}
+  td{vertical-align:top;padding:6px 8px 6px 0;border-bottom:1px solid var(--hair)}
+  td.num,th.num{text-align:right;white-space:nowrap}
+  td.tag,th.tag{width:8%;color:var(--tag);font-size:.8rem}
+  tr{break-inside:avoid}
+  .rec{color:var(--accent);font-weight:700}
+  .note{font-size:.82rem;color:var(--muted);margin:4px 0 0}
+  .chart{margin:8px 0 4px}
+  .chart svg{width:100%;height:auto;display:block}
+  .cap{font-size:.8rem;color:var(--muted)}
+  .status{display:inline-flex;gap:6px;align-items:center;font-weight:600;font-size:.85rem}
+  .status.ok{color:var(--ok)} .status.risk{color:var(--risk)} .status.off{color:var(--off)} .status.nodata,.status.unjudged{color:var(--nodata)}
+  .gaps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;font-size:.93rem}
+  .gaps h4{font-size:.8rem;color:var(--muted);margin:0 0 4px;border-bottom:1px solid var(--ink);padding-bottom:3px}
+  .gaps ul{margin:0;padding-left:0;list-style:none}
+  .footblock{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;border-top:1px solid var(--hair);margin-top:28px;padding-top:10px;font-size:.8rem;color:var(--muted)}
+  .footblock b{color:var(--muted);font-weight:600}
+  .slide{border:1px solid var(--hair);padding:14px 16px;margin:12px 0}
+  .slide .n{font-size:.78rem;color:var(--muted)}
+  @media print{
+    @page{size:A4;margin:18mm 20mm 22mm}
+    html{font-size:10.5pt} .page{max-width:none;padding:0}
+    h2{break-after:avoid} table{break-inside:auto} tr,td,th{break-inside:avoid} thead{display:table-header-group}
+    .callout{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hdr"><span class="label" id="wordmark"></span><span id="date"></span></div>
+  <h1 id="title"></h1>
+  <div class="prov" id="prov"></div>
+
+  <div class="callout" id="callout"></div>
+
+  <div id="sections"></div>
+
+  <h2>What the source does not provide</h2>
+  <div class="gaps" id="gaps"></div>
+  <p class="note" id="gapnote"></p>
+
+  <div class="footblock" id="footblock"></div>
+</div>
+
+<script>
+/* ===================== DATA — fill this block only ===================== */
+const DATA = {
+  wordmark: "",                         // e.g. "Organisation · Decision paper"; empty = omit
+  date: "",
+  title: "",                            // message title
+  provenance: "",
+  decision: { ask: "", tag: "A", authority: "", from: "", by: "" },
+  sections: [
+    /* { h: "Recommended: …", paras: [ {text:"…", tag:"J"} ] },
+       { h: "The three facts that decide it", table: { cols:["What the register shows","Position","Comparator","Tag"],
+                                                      num:[1], rows:[["…","2","…","F"]] } },
+       { h: "…", chart: { svg: "<svg …>", caption: "…" } },
+       { h: "Options", table: {...}, note: "Cost … not derivable from the source." },
+       { h: "Slide 1 — …", slide: true, paras:[...] }   // deck-outline mode */
+  ],
+  gaps: { Owners: [], Dates: [], "Comparators & ranges": [], Other: [] },
+  footer: { lens: "", tier: "", emphasis: "minimal", sources: [], gapsPage: "" , visualCheck: "pass" }
+};
+/* ======================================================================= */
+
+const TAGL = {F:"F", E:"E", A:"A", J:"J"};
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+// inline placeholders: [MISSING: x] or [x] written as {{ph:x}} in text → short grey italic
+const ph = s => esc(s).replace(/\{\{ph:(.*?)\}\}/g, (_, x) => `<span class="ph">[${x}]</span>`).replace(/\[MISSING:\s*([^\]]*)\]/g, (_, x) => `<span class="ph">[${x.split(" — ")[0]}]</span>`);
+const tag = t => t ? `<sup class="tag">${TAGL[t]||esc(t)}</sup>` : "";
+
+function table(tb){
+  const num = new Set(tb.num||[]); const last = tb.cols.length-1; const tagCol = /^tag$/i.test(tb.cols[last]);
+  return `<table><thead><tr>${tb.cols.map((c,i)=>`<th class="${num.has(i)?"num":""} ${tagCol&&i===last?"tag":""}">${esc(c)}</th>`).join("")}</tr></thead>
+  <tbody>${tb.rows.map(r=>`<tr>${r.map((c,i)=>`<td class="${num.has(i)?"num":""} ${tagCol&&i===last?"tag":""}">${ph(c).replace(/\*\*(.*?)\*\*/g,"<b>$1</b>").replace(/\{\{rec\}\}/g,'<span class="rec">Recommended</span>')}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+}
+
+function render(){
+  document.getElementById("wordmark").textContent = DATA.wordmark||"";
+  document.getElementById("date").textContent = DATA.date||"";
+  document.getElementById("title").textContent = DATA.title||"[MISSING: title]";
+  document.getElementById("prov").textContent = DATA.provenance||"";
+
+  const d = DATA.decision||{};
+  document.getElementById("callout").innerHTML = `<div class="label">Decision required</div>
+    <div class="ask">${ph(d.ask)}${tag(d.tag)}</div>
+    <div class="strip">Authority &nbsp;<b>${ph(d.authority)}</b> &nbsp;·&nbsp; From &nbsp;<b>${ph(d.from)}</b> &nbsp;·&nbsp; By &nbsp;<b>${ph(d.by)}</b></div>`;
+
+  document.getElementById("sections").innerHTML = (DATA.sections||[]).map((s,i)=>{
+    let inner = "";
+    if (s.paras) inner += s.paras.map(p=>`<p>${ph(p.text)}${tag(p.tag)}</p>`).join("");
+    if (s.table) inner += table(s.table);
+    if (s.chart) inner += `<div class="chart">${s.chart.svg||""}<div class="cap">${ph(s.chart.caption||"")}</div></div>`;
+    if (s.note) inner += `<p class="note">${ph(s.note)}</p>`;
+    return s.slide ? `<div class="slide"><div class="n">Slide ${i+1}</div><h2 style="margin-top:2px">${ph(s.h)}</h2>${inner}</div>`
+                   : `<h2>${ph(s.h)}</h2>${inner}`;
+  }).join("");
+
+  const g = DATA.gaps||{}; let n = 0;
+  document.getElementById("gaps").innerHTML = Object.entries(g).filter(([,v])=>v&&v.length).map(([k,v])=>{ n+=v.length;
+    return `<div><h4>${esc(k)}</h4><ul>${v.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;}).join("");
+  document.getElementById("gapnote").textContent = n ? `${n} items. Each shown once here; marked in grey italics where it affects a statement above. None has been estimated.` : "None — every statement above is sourced.";
+
+  const f = DATA.footer||{};
+  document.getElementById("footblock").innerHTML = `<div><b>Lens</b> &nbsp;${esc(f.lens)}<br><b>Stake tier</b> &nbsp;${esc(f.tier)}<br><b>Emphasis</b> &nbsp;${esc(f.emphasis||"minimal")}<br><b>Visual check</b> &nbsp;${esc(f.visualCheck||"")}</div>
+    <div><b>Tags</b> &nbsp;<span style="color:var(--tag)">F</span> fact from source · <span style="color:var(--tag)">E</span> estimate · <span style="color:var(--tag)">A</span> assumption · <span style="color:var(--tag)">J</span> judgement<br>
+    <b>Source gaps</b> &nbsp;${n} items the source does not provide${f.gapsPage?" — "+esc(f.gapsPage):""}<br><b>Sources</b> &nbsp;${(f.sources||[]).map(esc).join(" · ")}</div>`;
+}
+render();
+</script>
+</body>
+</html>

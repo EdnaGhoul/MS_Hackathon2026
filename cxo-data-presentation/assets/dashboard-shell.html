@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<!--
+  cxo-data-presentation — Route B dashboard shell.
+  Self-contained: no external scripts, fonts, or images. Inline SVG only.
+  Fill the DATA block below. Every KPI needs every field; use "[MISSING: ...]" for gaps.
+  Status is always icon + text + colour (WCAG 2.2 SC 1.4.1). Bars start at zero.
+  Emphasis policy: minimal. One accent colour; context in grey.
+-->
+<style>
+  :root{  /* tokens — see references/design-system.md; an organisation edits only these */
+    --font:"Aptos","Segoe UI",Calibri,Carlito,Helvetica,Arial,sans-serif;
+    --ink:#1A1A1A; --muted:#6B6B6B; --tag:#8A8A8A; --line:#D9D9D9; --bg:#ffffff; --panel:#F3F4F6;
+    --accent:#1F4E79; --ok:#1B7F3B; --risk:#B8860B; --off:#B02A2A; --nodata:#6B6B6B;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.35 var(--font);color:var(--ink);background:var(--bg)}
+  header{padding:20px 28px;border-bottom:1px solid var(--line)}
+  h1{font-size:20px;margin:0 0 6px}
+  h2{font-size:15px;margin:0 0 10px}
+  .meta{color:var(--muted);font-size:12px}
+  .meta span+span::before{content:" · ";color:var(--line)}
+  section{padding:18px 28px;border-bottom:1px solid var(--line)}
+  .strip{background:var(--panel)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .card{border:1px solid var(--line);border-radius:6px;padding:12px;background:var(--bg)}
+  .card h3{font-size:13px;margin:0 0 6px;font-weight:600}
+  .kv{font-size:12px;color:var(--muted);margin:2px 0}
+  .kv b{color:var(--ink);font-weight:600}
+  .status{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:12px;padding:2px 8px;border-radius:12px;border:1px solid currentColor}
+  .status.ok{color:var(--ok)} .status.risk{color:var(--risk)} .status.off{color:var(--off)} .status.nodata,.status.unjudged{color:var(--nodata)}
+  .card details{margin-top:6px} .card summary{font-size:12px;color:var(--muted);cursor:pointer}
+  .big{font-size:22px;font-weight:700;line-height:1.1;margin:6px 0 2px} .big small{font-size:12px;font-weight:400;color:var(--muted)}
+  .gaps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:13px} .gaps h4{font-size:12px;color:var(--muted);margin:0 0 4px;border-bottom:1px solid var(--ink)} .gaps ul{margin:0;padding-left:0;list-style:none}
+  .tag{display:inline-block;font-size:10px;font-weight:400;padding:0 4px;border:1px solid var(--tag);border-radius:3px;color:var(--tag);margin-right:4px;vertical-align:middle}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12px}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .bullet{width:100%;height:14px;margin-top:6px}
+  .placeholder{color:var(--tag);font-style:italic}
+  footer{padding:16px 28px;color:var(--muted);font-size:12px}
+  .exc{border-left:4px solid var(--off);padding-left:10px;margin:8px 0}
+  @media print{section{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>{{TITLE}}</h1>
+  <div class="meta">
+    <span>Decision served: <b>{{DECISION}}</b></span>
+    <span>Refresh: {{CADENCE}}</span>
+    <span>As of: {{AS_OF}}</span>
+    <span>Lens: {{LENS}}</span>
+    <span>Tier: {{TIER}}</span>
+    <span>Emphasis: minimal</span>
+  </div>
+</header>
+
+<!-- 1. Decision strip -->
+<section class="strip">
+  <h2>Decisions this dashboard supports</h2>
+  <ul id="decisions"></ul>
+</section>
+
+<!-- 2. Exception panel -->
+<section>
+  <h2>Material exceptions</h2>
+  <div id="exceptions"></div>
+</section>
+
+<!-- 3. KPI grid -->
+<section>
+  <h2>Scorecard</h2>
+  <div class="grid" id="kpis"></div>
+</section>
+
+<!-- 4. Driver view -->
+<section>
+  <h2>Drivers</h2>
+  <div class="grid" id="drivers"></div>
+</section>
+
+<!-- 5. Forward view -->
+<section>
+  <h2>Outlook</h2>
+  <div id="outlook"></div>
+</section>
+
+<!-- 6. Assumptions register -->
+<section>
+  <h2>Assumptions register</h2>
+  <table id="assumptions"><thead><tr><th>Tag</th><th>Assumption</th><th>Basis</th><th>Owner</th><th>Last validated</th></tr></thead><tbody></tbody></table>
+</section>
+
+<!-- 7. Decisions and asks -->
+<section>
+  <h2>Open decisions and asks</h2>
+  <table id="asks"><thead><tr><th>Ask</th><th>Authority</th><th>From</th><th>By</th><th>Owner</th></tr></thead><tbody></tbody></table>
+</section>
+
+<!-- 7b. What the source does not provide -->
+<section>
+  <h2>What the source does not provide</h2>
+  <div class="gaps" id="gaps"></div>
+  <p class="meta" id="gapnote"></p>
+</section>
+
+<!-- 8. Footer -->
+<footer id="footer"></footer>
+
+<script>
+/* ===================== DATA — fill this block only ===================== */
+const DATA = {
+  decisions: [ /* "Reallocate coverage across the enterprise segment (weekly)" */ ],
+  exceptions: [ /* {kpi, actual, target, unit, breach, action, owner, due} */ ],
+  kpis: [ /* {title, objective, decision, owner, definition, type:"outcome"|"driver",
+              actual, target, tolerance, threshold, thresholdOwner, unit,
+              comparison, comparisonValue, cadence, exceptionAction,
+              status:"ok"|"risk"|"off"|"nodata", source, asOf, tag:"F"|"E"|"A"|"J"} */ ],
+  drivers: [ /* {title, svg} — inline SVG string, annotated, zero baseline */ ],
+  outlook: { /* central, low, high, unit, sensitivities:[{assumption, switchingValue}] */ },
+  assumptions: [ /* {tag, text, basis, owner, validated} */ ],
+  asks: [ /* {ask, authority, from, by, owner} */ ],
+  gaps: { /* Owners: [], Dates: [], "Comparators & ranges": [], Other: [] — each item once */ },
+  footer: { sources: [], thresholdHistory: [], knownGaps: [], generated: "", visualCheck: "pass" }
+};
+/* ======================================================================= */
+
+const ICON = {ok:"●", risk:"▲", off:"■", nodata:"○", unjudged:"◇"};
+const LABEL = {ok:"On track", risk:"At risk", off:"Off track", nodata:"No data", unjudged:"No target"};
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const isPH = s => /\[MISSING/.test(String(s));
+const ph = s => isPH(s) ? `<span class="placeholder">[${esc(String(s).replace(/^\[MISSING:?\s*/,"").replace(/\]$/,"").split(" — ")[0])}]</span>` : esc(s);
+
+function bullet(actual, target, tolerance){
+  // zero-baseline bullet: grey track to max(actual,target)*1.15, target tick, actual bar.
+  // No target → no bar and no tick (status ◇ No target); no actual → empty track.
+  const hasT = target !== "" && target != null && !isPH(target) && !isNaN(Number(target));
+  const hasA = actual !== "" && actual != null && !isPH(actual) && !isNaN(Number(actual));
+  if (!hasT || !hasA) return `<svg class="bullet" viewBox="0 0 100 14" preserveAspectRatio="none" role="img" aria-label="${hasA?"no target":"no value"}"><rect x="0" y="4" width="100" height="6" fill="#efefef"/><line x1="0" x2="100" y1="7" y2="7" stroke="#d0d0d0" stroke-dasharray="2 2"/></svg>`;
+  const max = Math.max(Number(actual)||0, Number(target)||0) * 1.15 || 1;
+  const w = v => Math.max(0, Math.min(100, (Number(v)||0) / max * 100));
+  return `<svg class="bullet" viewBox="0 0 100 14" preserveAspectRatio="none" role="img" aria-label="actual ${esc(actual)} vs target ${esc(target)}">
+    <rect x="0" y="4" width="100" height="6" fill="#e6e6e6"/>
+    ${tolerance ? `<rect x="${w(target - tolerance)}" y="4" width="${w(target + tolerance) - w(target - tolerance)}" height="6" fill="#d0d0d0"/>` : ""}
+    <rect x="0" y="5" width="${w(actual)}" height="4" fill="var(--accent)"/>
+    <line x1="${w(target)}" x2="${w(target)}" y1="1" y2="13" stroke="#1a1a1a" stroke-width="1.2"/>
+  </svg>`;
+}
+
+function render(){
+  document.getElementById("decisions").innerHTML = DATA.decisions.map(d=>`<li>${ph(d)}</li>`).join("") || "<li class='placeholder'>[MISSING: decisions this dashboard serves]</li>";
+
+  document.getElementById("exceptions").innerHTML = DATA.exceptions.length
+    ? `<table><thead><tr><th>KPI</th><th>Actual vs comparator</th><th>Breach</th><th>Action</th><th>Owner</th><th>Due</th><th>Tag</th></tr></thead><tbody>${DATA.exceptions.map(e=>`<tr><td><b>${ph(e.kpi)}</b></td><td>${ph(e.actual)} vs ${ph(e.target)} ${esc(e.unit||"")}</td><td>${ph(e.breach)}</td><td>${ph(e.action)}</td><td>${ph(e.owner)}</td><td>${ph(e.due)}</td><td><span class="tag">${esc(e.tag||"F")}</span></td></tr>`).join("")}</tbody></table>`
+    : "<p>No exceptions — verified against stated thresholds as of " + esc(DATA.footer.generated||"[MISSING: date]") + ".</p>";
+
+  document.getElementById("kpis").innerHTML = DATA.kpis.map(k=>{
+    const st = (k.status && k.status!=="nodata") ? k.status : (isPH(k.actual)||k.actual===""||k.actual==null ? "nodata" : (isPH(k.target)||k.target===""||k.target==null ? "unjudged" : k.status||"nodata"));
+    return `
+    <div class="card">
+      <h3>${ph(k.title)}</h3>
+      <div class="big">${ph(k.actual)} <small>${esc(k.unit||"")}${!isPH(k.target)&&k.target!==""&&k.target!=null?` · target ${ph(k.target)}`:""}</small></div>
+      <span class="status ${st}">${ICON[st]} ${LABEL[st]}</span>
+      ${bullet(k.actual, k.target, k.tolerance)}
+      <details><summary>Definition, owner, thresholds, source</summary>
+        <div class="kv"><span class="tag">${esc(k.tag||"F")}</span>${esc(k.comparison||"")} ${ph(k.comparisonValue||"")}</div>
+        <div class="kv">Objective: <b>${ph(k.objective)}</b></div>
+        <div class="kv">Decision: <b>${ph(k.decision)}</b></div>
+        <div class="kv">Owner: <b>${ph(k.owner)}</b> · Type: ${esc(k.type||"")}</div>
+        <div class="kv">Tolerance ±${ph(k.tolerance)} · Escalate at ${ph(k.threshold)} (owner: ${ph(k.thresholdOwner)})</div>
+        <div class="kv">On exception: ${ph(k.exceptionAction)}</div>
+        <div class="kv">Cadence: ${esc(k.cadence||"")} · Source: ${ph(k.source)} · As of: ${ph(k.asOf)}</div>
+        <div class="kv">Definition: ${ph(k.definition)}</div>
+      </details>
+    </div>`;}).join("");
+
+  document.getElementById("drivers").innerHTML = DATA.drivers.map(d=>`<div class="card"><h3>${ph(d.title)}</h3>${d.svg||""}</div>`).join("");
+
+  const o = DATA.outlook||{};
+  document.getElementById("outlook").innerHTML = o.central
+    ? `<p><span class="tag">E</span>Central <b>${ph(o.central)}</b> ${esc(o.unit||"")}, range <b>${ph(o.low)}–${ph(o.high)}</b>.</p>
+       <table><thead><tr><th>Key assumption</th><th>Switching value</th></tr></thead><tbody>${(o.sensitivities||[]).map(s=>`<tr><td>${ph(s.assumption)}</td><td>${ph(s.switchingValue)}</td></tr>`).join("")}</tbody></table>`
+    : "<p class='placeholder'>[MISSING: outlook with range]</p>";
+
+  document.querySelector("#assumptions tbody").innerHTML = DATA.assumptions.map(a=>`<tr><td><span class="tag">${esc(a.tag||"A")}</span></td><td>${ph(a.text)}</td><td>${ph(a.basis)}</td><td>${ph(a.owner)}</td><td>${ph(a.validated)}</td></tr>`).join("");
+  document.querySelector("#asks tbody").innerHTML = DATA.asks.map(a=>`<tr><td>${ph(a.ask)}</td><td>${esc(a.authority||"")}</td><td>${ph(a.from)}</td><td>${ph(a.by)}</td><td>${ph(a.owner)}</td></tr>`).join("");
+
+  const g = DATA.gaps||{}; let n = 0;
+  document.getElementById("gaps").innerHTML = Object.entries(g).filter(([,v])=>v&&v.length).map(([k,v])=>{ n+=v.length;
+    return `<div><h4>${esc(k)}</h4><ul>${v.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;}).join("");
+  document.getElementById("gapnote").textContent = n ? `${n} items. Each shown once here; marked in grey italics where it affects a value above. None has been estimated.` : "None — every value above is sourced.";
+
+  const f = DATA.footer||{};
+  document.getElementById("footer").innerHTML =
+    `<div>Sources: ${(f.sources||[]).map(esc).join("; ") || "[none listed]"}</div>
+     <div>Threshold history: ${(f.thresholdHistory||[]).map(esc).join("; ") || "unchanged"}</div>
+     <div>Source gaps: ${n} — see "What the source does not provide" · Visual check: ${esc(f.visualCheck||"")}</div>
+     <div>Known gaps: ${(f.knownGaps||[]).map(esc).join("; ") || "none"}</div>
+     <div>Generated ${esc(f.generated||"")} · Tags: <span class="tag">F</span> fact <span class="tag">E</span> estimate <span class="tag">A</span> assumption <span class="tag">J</span> judgement · Status shown as icon + word + colour</div>`;
+}
+render();
+</script>
+</body>
+</html>
